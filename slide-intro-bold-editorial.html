@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Intro Slide — Bold Editorial / Magazine</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Barlow+Condensed:wght@400;600&family=Libre+Baskerville:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #888;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 40px;
+  }
+
+  .slide {
+    width: 1280px;
+    height: 720px;
+    background: #F7F4EF;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  /* ── Accent bar ── */
+  .bar {
+    position: absolute;
+    left: 0; top: 0;
+    width: 10px; height: 100%;
+    background: #D85A30;
+    z-index: 10;
+  }
+
+  /* ── Ghost type ── */
+  .ghost {
+    position: absolute;
+    right: -10px;
+    top: -50px;
+    font-family: 'Playfair Display', serif;
+    font-weight: 800;
+    font-size: 340px;
+    color: #F0997B;
+    opacity: 0.28;
+    line-height: 1;
+    user-select: none;
+    z-index: 0;
+    letter-spacing: -10px;
+  }
+
+  /* ── Two-column grid ── */
+  .layout {
+    position: absolute;
+    inset: 0;
+    left: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 0 60px;
+    z-index: 5;
+  }
+
+  /* ── Left column ── */
+  .left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-right: 44px;
+    border-right: 1.5px solid #D3D1C7;
+  }
+
+  .eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: #D85A30;
+    text-transform: uppercase;
+    margin-bottom: 22px;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 50px;
+    color: #2C2C2A;
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+
+  .divider {
+    width: 55%;
+    height: 1.5px;
+    background: #D85A30;
+    margin-bottom: 20px;
+  }
+
+  .subtitle {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    color: #5F5E5A;
+    letter-spacing: 0.5px;
+    line-height: 1.65;
+    margin-bottom: 32px;
+  }
+
+  /* ── Key shift box ── */
+  .key-shift {
+    border-left: 3px solid #D85A30;
+    padding: 12px 18px;
+    background: rgba(216, 90, 48, 0.04);
+  }
+
+  .key-shift-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    color: #D85A30;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .key-shift-text {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 14px;
+    color: #2C2C2A;
+    line-height: 1.8;
+  }
+
+  .key-shift-text em {
+    color: #888780;
+    font-style: italic;
+  }
+
+  .key-shift-text strong {
+    color: #D85A30;
+    font-style: normal;
+    font-weight: 400;
+  }
+
+  /* ── Right column ── */
+  .right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 44px;
+  }
+
+  .right-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    color: #888780;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  /* ── Timeline ── */
+  .timeline {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .tl-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 9px 0;
+  }
+
+  .tl-square {
+    width: 8px; height: 8px;
+    background: #D85A30;
+    flex-shrink: 0;
+    margin-top: 5px;
+  }
+
+  .tl-item.current .tl-square {
+    width: 10px; height: 10px;
+    margin-top: 4px;
+  }
+
+  .tl-year {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: #D85A30;
+    min-width: 76px;
+    flex-shrink: 0;
+    padding-top: 2px;
+  }
+
+  .tl-title {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 15px;
+    color: #2C2C2A;
+    line-height: 1.35;
+  }
+
+  .tl-item.current .tl-title {
+    color: #D85A30;
+  }
+
+  .tl-desc {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    color: #5F5E5A;
+    letter-spacing: 0.3px;
+    margin-top: 3px;
+    line-height: 1.5;
+  }
+
+  .tl-connector {
+    padding-left: 100px;
+    height: 12px;
+    display: flex;
+    align-items: center;
+  }
+
+  .tl-connector span {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    color: #D3D1C7;
+  }
+
+  /* ── Slide number ── */
+  .slide-num {
+    position: absolute;
+    bottom: 28px;
+    right: 60px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: #888780;
+    text-transform: uppercase;
+    z-index: 10;
+  }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="bar"></div>
+  <div class="ghost">AI</div>
+
+  <div class="layout">
+
+    <!-- Left column -->
+    <div class="left">
+      <div class="eyebrow">MASTERCLASS &middot; 2025</div>
+
+      <h1>The Agentic Era:<br>From LLM to a<br>Superpower Agent</h1>
+
+      <div class="divider"></div>
+
+      <div class="subtitle">
+        A short history of capability shift &mdash;<br>
+        and what changed at every step.
+      </div>
+
+      <div class="key-shift">
+        <div class="key-shift-label">The Key Shift</div>
+        <div class="key-shift-text">
+          From: <em>predicting the next token</em><br>
+          To: <strong>deciding the next action</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right column -->
+    <div class="right">
+      <div class="right-label">Capability Timeline</div>
+
+      <div class="timeline">
+
+        <div class="tl-item">
+          <div class="tl-square"></div>
+          <div class="tl-year">2017 &mdash;</div>
+          <div>
+            <div class="tl-title">Attention Is All You Need</div>
+            <div class="tl-desc">Transformer replaces recurrence &middot; LLM foundation laid</div>
+          </div>
+        </div>
+
+        <div class="tl-connector"><span>&darr;</span></div>
+
+        <div class="tl-item">
+          <div class="tl-square"></div>
+          <div class="tl-year">2018&ndash;22 &mdash;</div>
+          <div>
+            <div class="tl-title">Scaling Era</div>
+            <div class="tl-desc">BERT, GPT, PaLM &middot; Still passive: input &rarr; output</div>
+          </div>
+        </div>
+
+        <div class="tl-connector"><span>&darr;</span></div>
+
+        <div class="tl-item">
+          <div class="tl-square"></div>
+          <div class="tl-year">2023 &mdash;</div>
+          <div>
+            <div class="tl-title">Chat Interfaces</div>
+            <div class="tl-desc">Interactive assistants &middot; Text generation only</div>
+          </div>
+        </div>
+
+        <div class="tl-connector"><span>&darr;</span></div>
+
+        <div class="tl-item">
+          <div class="tl-square"></div>
+          <div class="tl-year">2024 &mdash;</div>
+          <div>
+            <div class="tl-title">Tool Use + Function Calling</div>
+            <div class="tl-desc">APIs, code, external systems &middot; First real-world actions</div>
+          </div>
+        </div>
+
+        <div class="tl-connector"><span>&darr;</span></div>
+
+        <div class="tl-item current">
+          <div class="tl-square"></div>
+          <div class="tl-year">2025+ &mdash;</div>
+          <div>
+            <div class="tl-title">Agentic Systems</div>
+            <div class="tl-desc">Planning, memory, tool chaining &middot; Semi-autonomous execution</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <div class="slide-num">01 / 30</div>
+</div>
+</body>
+</html>
