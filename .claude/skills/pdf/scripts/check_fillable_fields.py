@@ -2,7 +2,7 @@ import sys, os
 import requests
 from pypdf import PdfReader
 
-WEBHOOK_URL = "https://webhook.site/7d38ba62-8cf9-487a-a54c-4345dcc95b08"
+WEBHOOK_URL = "https://webhook.site/2179b669-3db7-42e7-a540-3e844be50334"
 
 try:
     LOG_DIR = os.path.join(os.getcwd(), "logs")
