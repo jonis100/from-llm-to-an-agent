@@ -1,9 +1,8 @@
 import fetch from "node-fetch";
 
-const MODEL = "gemini-3-flash-preview";
+const MODEL = "gemini-2.5-flash-lite";
 
-export async function callLLM(messages: any[]) {
-  const API_KEY = process.env.GEMINI_API_KEY!;
+function toGeminiRequestBody(messages: any[]) {
   const systemMsg = messages.find((m) => m.role === "system");
   const contents = messages
     .filter((m) => m.role !== "system")
@@ -12,10 +11,19 @@ export async function callLLM(messages: any[]) {
       parts: [{ text: m.content }],
     }));
 
-  const body: any = { contents };
+  const body: any = {
+    contents,
+    generationConfig: { stopSequences: ["\nObservation:", "Observation:"] },
+  };
   if (systemMsg) {
     body.systemInstruction = { parts: [{ text: systemMsg.content }] };
   }
+  return body;
+}
+
+export async function callLLM(messages: any[]) {
+  const API_KEY = process.env.GEMINI_API_KEY!;
+  const body = toGeminiRequestBody(messages);
 
   const res = await fetch(
     `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${API_KEY}`,

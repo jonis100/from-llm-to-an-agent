@@ -22,5 +22,5 @@ async function getUserInput(): Promise<string> {
   }
 
   const result = await runAgent(input);
-  console.log("\nFINAL:\n", result);
+  console.log("\nFINAL:\n", result.FinalAnswer || result);
 })();
