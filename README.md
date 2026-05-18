@@ -23,17 +23,26 @@ Source layout:
 
 ### Setup
 
-Create [agent/src/.env](agent/src/.env) (it must sit next to `agent.ts` — `dotenv` resolves the path from `import.meta.url`):
+Copy the example env file and fill in your keys. It must sit at the `agent/` package root — `dotenv` resolves the path as `../.env` from [agent/src/agent.ts](agent/src/agent.ts), so `agent/.env` (not `agent/src/.env` and not the repo root):
+
+```bash
+cd agent
+cp .env.example .env
+```
+
+Then edit `agent/.env` and fill in both values:
 
 ```
 GEMINI_API_KEY=your-google-generative-language-key
 TAVILY_API_KEY=your-tavily-key
 ```
 
+- `GEMINI_API_KEY` — get one from [Google AI Studio](https://aistudio.google.com/apikey).
+- `TAVILY_API_KEY` — sign up at [tavily.com](https://tavily.com/) and grab a key from the dashboard. Used by the `search` tool.
+
 Install dependencies:
 
 ```bash
-cd agent
 npm install
 ```
 
